@@ -16,6 +16,6 @@ import java.lang.Math;
              w[i] = scanner.nextInt();
          }
          GreedyOps go = new GreedyOps(n,k,w,maxW);
-         System.out.println("Max possible weight for a truck is equal : " + Math.max(go.greedyOp1(),go.greedyOp2()));
+         System.out.println("Max possible weight for a truck is equal : " );
      }
  }
