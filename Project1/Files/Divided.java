@@ -6,6 +6,7 @@ public class Divided {
     private int wMax;
     public Divided( Trucks trucks,int wMax){
         trucks = new Trucks();
+        this.wMax=wMax;
     }
 
     public int getwMax() {
