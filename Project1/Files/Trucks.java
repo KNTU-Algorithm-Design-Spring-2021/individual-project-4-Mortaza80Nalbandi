@@ -10,4 +10,8 @@ public class Trucks {
     public Map<Integer, ArrayList<Integer>> getTruckM() {
         return truckM;
     }
+
+    public void setTruckM(Map<Integer, ArrayList<Integer>> truckM) {
+        this.truckM = truckM;
+    }
 }

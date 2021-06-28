@@ -5,7 +5,7 @@ public class Divided {
     private  Trucks trucks;
     private int wMax;
     public Divided( Trucks trucks,int wMax){
-        trucks = new Trucks();
+        this.trucks = trucks;
         this.wMax=wMax;
     }
 

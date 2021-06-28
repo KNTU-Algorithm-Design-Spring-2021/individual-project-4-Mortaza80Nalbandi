@@ -49,6 +49,7 @@ public class GreedyOps {
                 Wmax = wSoFar;
             }
             remainingTrucks--;
+            j++;
         }
         int k = 0;
         while (remainingItems > remainingTrucks && k < s) {
@@ -68,6 +69,7 @@ public class GreedyOps {
                 Wmax = wSoFar;
             }
             remainingTrucks--;
+            j++;
         }
         while (i < b) {
             ArrayList<Integer> x = new ArrayList<Integer>();
@@ -79,6 +81,7 @@ public class GreedyOps {
             i++;
             remainingItems--;
             remainingTrucks--;
+            j++;
         }
         while (k < s) {
             ArrayList<Integer> x = new ArrayList<Integer>();
@@ -90,11 +93,9 @@ public class GreedyOps {
             k++;
             remainingItems--;
             remainingTrucks--;
+            j++;
         }
+        trucks.setTruckM(trucksM);
         return new Divided(trucks, Wmax);
-    }
-
-    public int greedyOp2() {
-        return 0;
     }
 }
