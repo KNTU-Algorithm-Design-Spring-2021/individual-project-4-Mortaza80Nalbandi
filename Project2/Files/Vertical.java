@@ -3,16 +3,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Vertical {
-    private int[] tos;
-    public Vertical(int n){
-        tos = new int[n];
+    private ArrayList<Integer> tos;
+
+    public Vertical() {
+        tos = new ArrayList<Integer>();
     }
 
-    public void addTos(int to,int j) {
-        tos[j] = to;
+    public void addTos(int to) {
+        tos.add(to);
     }
 
-    public int[] getTos() {
+    public void removeTos(int to) {
+        tos.remove(Integer.valueOf(to));
+    }
+
+    public ArrayList<Integer> getTos() {
         return tos;
     }
 }
