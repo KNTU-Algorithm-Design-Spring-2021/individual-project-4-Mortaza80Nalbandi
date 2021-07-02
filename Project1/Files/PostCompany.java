@@ -9,14 +9,12 @@ import java.util.*;
          int n = scanner.nextInt();
          System.out.println("Enter number of Trucks : ");
          int k = scanner.nextInt();
-         System.out.println("Enter max Weight ligal : ");
-         int maxW = scanner.nextInt();
          int[] w = new int[n];
          System.out.println("Enter Weights of items : ");
          for(int i=0;i<n;i++){
              w[i] = scanner.nextInt();
          }
-         GreedyOps go = new GreedyOps(n,k,w,maxW);
+         GreedyOps go = new GreedyOps(n,k,w);
          Divided d1 =  go.greedyOp1();
          System.out.println("Max possible weight for a truck is equal : " + d1.getwMax() );
          Map<Integer, ArrayList<Integer>> trucks =d1.getTrucks().getTruckM();

@@ -3,14 +3,13 @@ import java.util.Arrays;
 import java.util.*;
 
 public class GreedyOps {
-    private int n, k, maxW;
+    private int n, k;
     private int[] w;
 
-    public GreedyOps(int n, int k, int[] w, int maxW) {
+    public GreedyOps(int n, int k, int[] w) {
         this.n = n;
         this.k = k;
         this.w = w;
-        this.maxW = maxW;
     }
 
     public Divided greedyOp1() {
@@ -20,80 +19,46 @@ public class GreedyOps {
         for (int i = 0; i < n; i++) {
             mean += w[i];
         }
-        mean = mean / n;
-        ArrayList<Integer> smallerThanMean = new ArrayList<Integer>();
-        ArrayList<Integer> biggerThanMean = new ArrayList<Integer>();
+        mean = mean / k;
         Arrays.sort(w);
-        for (int i = 0; i < n; i++) {
-            if (w[i] >= mean) {
-                biggerThanMean.add(w[i]);
-            } else if (w[i] < mean) {
-                smallerThanMean.add(w[i]);
-            }
-        }
-        int remainingItems = n, remainingTrucks = k, i = 0, j = 1, b = biggerThanMean.size(), s = smallerThanMean.size();
-        while (remainingItems > remainingTrucks && i < b) {
+        int dir = 0, i = 0, j = 1;
+        while (i < n) {
             int wSoFar = 0;
             ArrayList<Integer> x = new ArrayList<Integer>();
-            trucksM.put(j, x);
-            while (remainingItems >= remainingTrucks && wSoFar + biggerThanMean.get(b-i-1) < maxW ) {
-                wSoFar += biggerThanMean.get(b-i-1);
-                x.add(biggerThanMean.get(b-i-1));
-                i++;
-                remainingItems--;
-                if(i >= b){
-                    break;
+            if (trucksM.containsKey(j)) {
+                x = trucksM.get(j);
+                for (int y = 0; y < x.size(); y++) {
+                    wSoFar += x.get(y);
                 }
+            } else {
+                trucksM.put(j, x);
             }
-            if (wSoFar > Wmax) {
-                Wmax = wSoFar;
-            }
-            remainingTrucks--;
-            j++;
-        }
-        int k = 0;
-        while (remainingItems > remainingTrucks && k < s) {
-            int wSoFar = 0;
-            ArrayList<Integer> x = new ArrayList<Integer>();
-            trucksM.put(j, x);
-            while (remainingItems >= remainingTrucks && wSoFar + smallerThanMean.get(s-k-1) < maxW ) {
-                wSoFar += smallerThanMean.get(s-k-1);
-                x.add(smallerThanMean.get(s-k-1));
-                k++;
-                remainingItems--;
-                if(k>=s){
-                    break;
-                }
-            }
-            if (wSoFar > Wmax) {
-                Wmax = wSoFar;
-            }
-            remainingTrucks--;
-            j++;
-        }
-        while (i < b) {
-            ArrayList<Integer> x = new ArrayList<Integer>();
-            trucksM.put(j, x);
-            x.add(biggerThanMean.get(b-i-1));
-            if (biggerThanMean.get(b-i-1) > Wmax) {
-                Wmax = biggerThanMean.get(b-i-1);
-            }
+
+            wSoFar += w[n - i - 1];
+            x.add(w[n - i - 1]);
             i++;
-            remainingItems--;
-            remainingTrucks--;
-            j++;
-        }
-        while (k < s) {
-            ArrayList<Integer> x = new ArrayList<Integer>();
-            trucksM.put(j, x);
-            x.add(smallerThanMean.get(s-k-1));
-            if (smallerThanMean.get(s-k-1) > Wmax) {
-                Wmax = smallerThanMean.get(s-k-1);
+            while (i < n && wSoFar + w[n - i - 1] <= mean) {
+                wSoFar += w[n - i - 1];
+                x.add(w[n - i - 1]);
+                i++;
             }
-            k++;
-            remainingItems--;
-            remainingTrucks--;
-            j++;
+            if (wSoFar > Wmax) {
+                Wmax = wSoFar;
+            }
+            if (dir == 0) {
+                j++;
+            }
+            if (dir == 1) {
+                j--;
+            }
+            if (j == k+1) {
+                j=j-2;
+                dir = 1;
+            }
+            if (j == 0) {
+                j=j+2;
+                dir = 0;
+            }
         }
         trucks.setTruckM(trucksM);
         return new Divided(trucks, Wmax);
